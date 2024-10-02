@@ -27,12 +27,13 @@ class CarDetailView(DetailView):
     template_name = 'car_detail.html'
     context_object_name = 'car' 
 
+# protegendo a view com login_required, está encapsulando a class
 @method_decorator(login_required(login_url='login'), name='dispatch')    
 class NewCarCreateView(CreateView):
     model = Car
     form_class = CarModelForm
     template_name = 'new_car.html'
-    success_url = '/cars/'
+    success_url = '/cars/' #redireciona para lista de carros
 
 @method_decorator(login_required(login_url='login'), name='dispatch')   
 class CarUpdateView(UpdateView):

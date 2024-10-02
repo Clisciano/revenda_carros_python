@@ -9,6 +9,7 @@ class Car(models.Model):
     value = models.FloatField(blank=True, null=True)
     plate = models.CharField(max_length=10, blank=True, null=True)
     photo = models.ImageField(upload_to='cars/', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -23,3 +24,17 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+#criando model invetário de carros
+class CarInventory(models.Model):
+    cars_count = models.IntegerField()
+    cars_value = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)   
+
+    # ordenando por data de criação decrescente (-)
+    class Meta:
+        ordering = ['-created_at']
+    #retornando a quantidade de carros e o valor total
+    # função __str__ retorna a representação do objeto como string
+    def __str__(self):
+        return f'{self.cars_count} carros - R$ {self.cars_value}'
